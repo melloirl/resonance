@@ -9,8 +9,8 @@ hero:
   actions:
     - theme: alt
       text: Guia Básico
-      link: /resonance
+      link: /guia
     - theme: alt
       text: Criação de Personagem
-      link: /character
+      link: /personagem
 ---
