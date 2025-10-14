@@ -2,24 +2,22 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  srcDir: 'docs',
   lang: 'pt-BR',
   base: '/resonance/',
-
   title: 'Ressonância',
   description: 'Uma introdução às mecânicas básicas do sistema de RPG ressonância.',
   themeConfig: {
     nav: [
       { text: 'Início', link: '/' },
-      { text: 'Exemplos', link: '/markdown-examples' },
+      { text: 'Guia', link: '/guia' },
     ],
 
     sidebar: [
       {
         text: 'Índice',
         items: [
-          { text: 'Guia Básico', link: '/resonance' },
-          { text: 'Criação de Personagem', link: '/character' },
+          { text: 'Guia Básico', link: '/guia' },
+          { text: 'Criação de Personagem', link: '/guia#personagem' },
         ],
       },
     ],
