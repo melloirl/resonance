@@ -1,0 +1,21 @@
+:root {
+  --vp-c-brand-1: #12de81;
+  --vp-c-brand-2: #0009ac;
+  --vp-c-bg: #000;
+
+  --vp-font-family-base: "Geist Mono", monospace;
+  --vp-font-family-mono: "Geist Mono", monospace;
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(0deg, #05eb7c, #09efe7, #05eb7c);
+
+}
+
+.image-src {
+  max-width: 500px !important;
+  max-height: 500px !important;
+}
+
+.image {
+  mix-blend-mode: hard-light;
+}
