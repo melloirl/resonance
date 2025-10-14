@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   srcDir: 'docs',
   lang: 'pt-BR',
+  base: 'resonance',
 
   title: 'Ressonância',
   description: 'Uma introdução às mecânicas básicas do sistema de RPG ressonância.',
