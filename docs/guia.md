@@ -1,8 +1,11 @@
-# **SISTEMA RESSONÂNCIA – Regras Básicas** {#regras}
-*Um sistema de RPG de mesa focado em investigação, mistério e horror tecno-ocultista ambientado nos anos 90.*
+---
+layout: doc
+sidebar: false
+---
+
+[![Capa do Guia](./public/mri-crt.png)](./public/mri-crt.png)
 
 ## Visão Geral {#geral}
-
 **Ressonância** é um sistema de RPG de investigação moderna onde os jogadores interpretam humanos comuns enfrentando fenômenos extraordinários — assombrações, entidades e ecos dos mortos que se infiltram em um mundo dominado pela tecnologia dos anos 90.
 
 O sistema foca em:
@@ -57,40 +60,58 @@ Elas são combinadas com os atributos para realizar as rolagens.
 
 ### As Perícias Básicas {#pericias-basicas}
 
-> [!DANGER]  Físicas e Furtividade 
-> 1. **Atletismo** – corrida, escalada, resistência.  
-> 2. **Destreza** – precisão e coordenação.  
-> 3. **Furtividade** – movimentar-se sem ser visto, seguir, esconder-se.  
-> 4. **Reflexos** – reagir a perigos ou surpresas.
-
-> [!TIP]  Investigação e Raciocínio
-> 5. **Investigação** – busca, dedução, análise de cenas.  
-> 6. **Pesquisa** – estudo de registros, dados, arquivos.  
-> 7. **Psicologia** – leitura de pessoas, detecção de mentiras.  
-> 8. **Lógica** – resolução de enigmas, códigos, raciocínio estruturado.
-
-> [!WARNING] Conhecimento Técnico
-> 9. **Eletrônica** – reparo e modificação de dispositivos.  
-> 10. **Computação** – hacking, software, gerenciamento de dados.  
-> 11. **Mecânica** – veículos, máquinas, ferramentas.  
-> 12. **Medicina** – primeiros socorros, anatomia, perícia forense.
-
-> [!INFO]  Social e Influência
-> 13. **Persuasão** – convencimento, enganação, liderança.  
-> 14. **Intimidação** – coerção, ameaças, presença dominante.  
-> 15. **Contatos** – pedir favores, explorar conexões.  
-> 16. **Empatia** – acalmar, reconfortar, perceber emoções.
+### Físicas e Furtividade 
+:::danger **Atletismo** – corrida, escalada, resistência.
+:::
+:::danger **Destreza** – precisão e coordenação.
+:::
+:::danger **Furtividade** – movimentar-se sem ser visto, seguir, esconder-se.
+:::
+:::danger **Reflexos** – reagir a perigos ou surpresas.
+:::
 
 
-> [!IMPORTANT] Oculto e Paranormal
-> 17. **Conhecimento Oculto** – saberes sobre rituais, folclore, lendas urbanas e o paranormal.  
-> 18. **Sexto Sentido** – detectar presenças e perturbações paranormais.  
-> 19. **Força de Vontade** – resistir à corrupção e à possessão.  
-> 20. ~~**Ritualismo** – interação paranormal avançada, obtida através de ?????? ou ???????.~~
+### Investigação e Raciocínio
+:::tip **Investigação** – busca, dedução, análise de cenas.
+:::
+:::tip **Pesquisa** – estudo de registros, dados, arquivos.
+:::
+:::tip **Psicologia** – leitura de pessoas, detecção de mentiras.
+:::
+:::tip **Lógica** – resolução de enigmas, códigos, raciocínio estruturado.
+:::
+
+### Conhecimento Técnico
+:::warning **Eletrônica** – reparo e modificação de dispositivos.
+:::
+:::warning **Computação** – hacking, software, gerenciamento de dados.
+:::
+:::warning **Mecânica** – veículos, máquinas, ferramentas.
+:::
+:::warning **Medicina** – primeiros socorros, anatomia, perícia forense.
+:::
+
+### Social e Influência
+:::info **Persuasão** – convencimento, enganação, liderança.
+:::
+:::info **Intimidação** – coerção, ameaças, presença dominante.
+:::
+:::info **Contatos** – pedir favores, explorar conexões.
+:::
+:::info **Empatia** – acalmar, reconfortar, perceber emoções.
+:::
+
+### Oculto e Paranormal
+<div class="custom-block important github-alert"><p class="custom-block-title"><strong>Conhecimento Oculto</strong> – saberes sobre folclore, lendas urbanas e o paranormal.</p></div>
+<div class="custom-block important github-alert"><p class="custom-block-title"><strong>Sexto Sentido</strong> – detectar presenças e perturbações paranormais.</p></div>
+<div class="custom-block important github-alert"><p class="custom-block-title"><strong>Força de Vontade</strong> – resistir à corrupção e à possessão.</p></div>
+<div class="custom-block important github-alert faded"><p class="custom-block-title"><strong>Ritualismo</strong> – interação paranormal avançada, obtida através de ?̴͙̪͙̝͌̽̂̉*̵̨̪͖͎͒͋́̾°̷̼̺͚͉̟͆̍̃(̶̤́ṵ̵̼̼͆̅1̷̩̳̿̉D̷͎̮̮̄̇̉̆4̶͇̱̘͗́͘d̴̲̪͚̭͓̈́̀0̷͔̤͆ͅ</p></div>
 
 ## Ocupações e Bônus Iniciais {#ocupacao}
 
-A **Ocupação** do personagem concede 1–2 bônus de perícia que refletem sua área de atuação.
+A **Ocupação** do personagem concede 1–2 bônus de perícia que refletem sua área de atuação. 
+
+Alguns exemplos de ocupações comuns são:
 
 | Ocupação | Bônus Iniciais |
 |-----------|----------------|
