@@ -5,6 +5,7 @@ export default defineConfig({
   lang: 'pt-BR',
   base: '/resonance/',
   title: 'Ressonância',
+  head: [['link', { rel: 'icon', href: '/resonance/favicon.ico' }]],
   description: 'Uma introdução às mecânicas básicas do sistema de RPG ressonância.',
   themeConfig: {
     nav: [
