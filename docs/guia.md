@@ -6,16 +6,19 @@ sidebar: false
 [![Capa do Guia](./public/mri-crt.png)](./public/mri-crt.png)
 
 ## Visão Geral {#geral}
-**Ressonância** é um sistema de RPG de investigação moderna onde os jogadores interpretam humanos comuns enfrentando fenômenos extraordinários — assombrações, entidades e ecos dos mortos que se infiltram em um mundo dominado pela tecnologia dos anos 90.
+**Ressonância** é um sistema de RPG de investigação moderna onde os jogadores interpretam humanos comuns enfrentando fenômenos extraordinários.
+
+Assombrações, entidades e ecos dos mortos que se infiltram em um mundo dominado pela tecnologia dos anos 90.
 
 O sistema foca em:
+
 - **Investigação, dedução e atmosfera** em vez de puro combate.  
 - **Limitações humanas realistas** reforçadas por mecânicas simples.  
 - **Tentação e consequência**, pois interações sobrenaturais têm um custo.
 
-Os jogadores desvendarão mistérios, farão pactos proibidos e arriscarão perder sua humanidade — seja pela violência ou pela proximidade com o desconhecido espectral.
+Os jogadores desvendarão mistérios, farão pactos proibidos e arriscarão perder sua humanidade, seja pela violência ou pela proximidade com o desconhecido sobrenatural.
 
-## Criação de Personagem {#personagem}
+## Personagem {#personagem}
 
 Os personagens são seres humanos comuns que se veem envolvidos em eventos paranormais. Cada um tem uma história pessoal, ocupação e perspectiva que moldam como percebem e interagem com o sobrenatural.
 
@@ -151,7 +154,7 @@ Se o personagem não possuir a perícia relevante:
 - Role apenas o **Atributo**.
 - Aumente a CD em **+3**.
 
-## Ressonância {#ressonancia}
+<!-- ## Ressonância {#ressonancia}
 
 ### Conceito {#conceito-ressonancia}
 
@@ -202,7 +205,7 @@ Sempre que um personagem entra em contato com energia sobrenatural:
 | **Recalibração Tecnológica** | 5–10% (purificações EMF, feedback de CRTs). |
 | **Terapia ou Meditação** | 5–15% (processar trauma, restaurar foco). |
 | **Rituais de Purificação** | 15–25% (realizados por médiuns). |
-| **Isolamento do Sobrenatural** | 1–3% por semana afastado do oculto. |
+| **Isolamento do Sobrenatural** | 1–3% por semana afastado do oculto. | -->
 
 ## Progressão {#progressao}
 
@@ -219,14 +222,14 @@ Ressonância prioriza **progressão narrativa** em vez de níveis numéricos.
   - Uma ou mais perícias usadas com frequência podem subir **+1**.  
   - Ocasionalmente, uma nova perícia pode ser adquirida.
 
-### Pactos e Rituais {#pactos-e-rituais}
+<!-- ### Pactos e Rituais {#pactos-e-rituais}
 - **Desbloqueiam habilidades ou modificam o comportamento da Ressonância.**
 - Podem fortalecer atributos temporariamente ou alterar regras de contaminação.
 
 > Os jogadores **não** sabem exatamente como evoluir.  
-> Devem sentir que o progresso vem de ações e consequências, não de XP.
+> Devem sentir que o progresso vem de ações e consequências, não de XP. -->
 
-## Pactos e o Sobrenatural {#pactos-e-o-sobrenatural}
+<!-- ## Pactos e o Sobrenatural {#pactos-e-o-sobrenatural}
 
 Ao fazer um **Pacto** com um fantasma:
 - Ganha-se uma **habilidade única**, **nova perícia** ou **bônus temporário de atributo**.  
@@ -234,7 +237,7 @@ Ao fazer um **Pacto** com um fantasma:
 - O fantasma passa a se manifestar (vozes, visões, compulsões).
 
 Pactos são **voluntários**, mas **obrigatórios** uma vez feitos.  
-Quebrá-los pode resultar em **perda de sanidade, maldições** ou **morte espiritual imediata**.
+Quebrá-los pode resultar em **perda de sanidade, maldições** ou **morte espiritual imediata**. -->
 
 ## Exemplos de Rolagem {#exemplos-de-rolagem}
 
@@ -267,7 +270,7 @@ Rolagem:
 
 Se falhar, o fantasma se desestabiliza e aumenta a Ressonância do grupo em +3%.
 
-## Resumo da Filosofia de Design {#filosofia-de-design}
+<!-- ## Resumo da Filosofia de Design {#filosofia-de-design}
 
 | Elemento do Sistema | Filosofia |
 |-----------------|-------------|
@@ -276,4 +279,4 @@ Se falhar, o fantasma se desestabiliza e aumenta a Ressonância do grupo em +3%.
 | **Ressonância** | Poder e corrupção são a mesma coisa. |
 | **Pactos** | A única fonte de avanço sobrenatural. |
 | **Progressão** | Sutil, guiada pela história, nunca gamificada. |
-| **Tom** | Investigativo, inquietante, de ritmo lento — como horror analógico misturado ao noir. |
+| **Tom** | Investigativo, inquietante, de ritmo lento — como horror analógico misturado ao noir. | -->

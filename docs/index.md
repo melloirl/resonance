@@ -12,5 +12,5 @@ hero:
       link: /guia
     - theme: alt
       text: Criação de Personagem
-      link: /guia#personagem
+      link: /personagem
 ---
