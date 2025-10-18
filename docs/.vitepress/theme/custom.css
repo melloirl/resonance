@@ -10,11 +10,6 @@
   --vp-home-hero-name-background: -webkit-linear-gradient(0deg, #05eb7c, #09efe7, #05eb7c);
 }
 
-.image-src {
-  max-width: 500px !important;
-  max-height: 500px !important;
-}
-
 .image {
   mix-blend-mode: hard-light;
 }
@@ -78,7 +73,28 @@
   }
 }
 
-.custom-block.faded {
+*.faded {
   filter: saturate(0.5);
   animation: candleFlicker 5s infinite;
+}
+
+.eidolon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.eidolon span {
+  color: var(--vp-c-brand-1);
+  font-weight: lighter;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+}
+
+.eidolon-logo {
+  height: 32px;
+  width: 32px;
+  background-repeat: no-repeat;
+  background-image: url('./eidolon.svg')
 }

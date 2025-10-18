@@ -11,6 +11,6 @@ hero:
       text: Guia Básico
       link: /guia
     - theme: alt
-      text: Criação de Personagem
-      link: /personagem
+      text: A Cidade de Welderhide
+      link: /welderhide
 ---

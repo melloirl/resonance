@@ -18,7 +18,7 @@ export default defineConfig({
         text: 'Índice',
         items: [
           { text: 'Guia Básico', link: '/guia' },
-          { text: 'Criação de Personagem', link: '/personagem' },
+          { text: 'A Cidade de Welderhide', link: '/welderhide' },
         ],
       },
     ],
