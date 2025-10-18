@@ -3,7 +3,7 @@ layout: doc
 sidebar: false
 ---
 # **Bem-vindos a Welderhide!** {#bem-vindos}
-[![Welderhide](./welderhide.png)](./welderhide.png)
+[![Welderhide](./public/welderhide.png)](./public/welderhide.png)
 
 > *“Ad perpetuum structus. - Construída para a Eternidade”*
 ---
@@ -45,4 +45,4 @@ Você **se acostuma com a estática**, eventualmente.
 
 ---
 
-[![Mapa de Welderhide](./weldermap.png)](./weldermap.png)
+[![Mapa de Welderhide](./public/weldermap.png)](./public/weldermap.png)
