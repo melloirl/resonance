@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -31,6 +32,9 @@ export default defineConfig({
       message: 'v0.1',
       copyright: 'Copyright © 2025 <a href="https://discord.com/channels/@me/149655287744167936">Pedro Melo</a>',
     },
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   appearance: 'force-dark',
 })

@@ -1,3 +1,7 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
 :root {
   --vp-c-brand-1: #12de81;
   --vp-c-brand-2: #0009ac;
@@ -78,23 +82,6 @@
   animation: candleFlicker 5s infinite;
 }
 
-.eidolon {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.eidolon span {
-  color: var(--vp-c-brand-1);
-  font-weight: lighter;
-  text-transform: uppercase;
-  letter-spacing: 10px;
-}
-
 .eidolon-logo {
-  height: 32px;
-  width: 32px;
-  background-repeat: no-repeat;
-  background-image: url('./eidolon.svg')
+  background-image: url('../../assets/eidolon.svg');
 }

@@ -3,7 +3,7 @@ layout: doc
 sidebar: false
 ---
 
-[![Capa do Guia](./public/mri-crt.png)](./public/mri-crt.png)
+[![Capa do Guia](./assets/mri-crt.png)](./assets/mri-crt.png)
 
 ## Visão Geral {#geral}
 **Ressonância** é um sistema de RPG de investigação moderna onde os jogadores interpretam humanos comuns enfrentando fenômenos extraordinários.

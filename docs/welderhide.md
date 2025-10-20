@@ -3,7 +3,7 @@ layout: doc
 sidebar: false
 ---
 # **Bem-vindos a Welderhide!** {#bem-vindos}
-[![Welderhide](./public/welderhide.png)](./public/welderhide.png)
+[![Welderhide](./assets/welderhide.png)](./assets/welderhide.png)
 
 > *“Ad perpetuum structus. - Construída para a Eternidade”*
 ---
@@ -22,14 +22,14 @@ Hoje, a **Eidolon Systems**, maior contratante de Welderhide, presenteia nossa c
 
 Nossa energia é **limpa e eficiente**, e nosso povo, **orgulhoso e diverso**.
 
-<div style="width: 100%; justify-content: end;" class="eidolon faded">
-<span> Eidolon Systems </span>
-  <div class="eidolon-logo"></div>
+<div class="w-full justify-end flex items-center faded gap-2 mt-4">
+<span class="text-[var(--vp-c-brand-1)] font-extralight uppercase tracking-widest">Eidolon Systems</span>
+  <div class="eidolon-logo size-8 bg-no-repeat"></div>
 </div>
 
 ---
 
-Ao cair da noite, o horizonte **exala um brilho azulado**, e a cidade **murmura suavemente** —  
+Ao cair da noite, o horizonte **exala um brilho azulado**, e a cidade **murmura suavemente**
 um tom constante e tranquilo, quase imperceptível para os locais.
 
 As pessoas chamam de **“murmúrio de Welderhide.”**
@@ -45,4 +45,4 @@ Você **se acostuma com a estática**, eventualmente.
 
 ---
 
-[![Mapa de Welderhide](./public/weldermap.png)](./public/weldermap.png)
+[![Mapa de Welderhide](./assets/weldermap.png)](./assets/weldermap.png)
