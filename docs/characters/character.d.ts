@@ -1,3 +1,5 @@
+import type { CharacterSkill } from './skills'
+
 export interface CharacterIdentity {
   fullName: string
   gender: string
@@ -27,20 +29,8 @@ export interface AttributesRules {
   maxPerAttribute: number
 }
 
-export interface Skill {
-  name: string
-  level: number
-  bonus?: boolean
-}
-
-export interface SkillsRules {
-  totalPoints: number
-  maxPerSkill: number
-  bonusLevels: number
-}
-
 export interface PlayerCharacter {
   identity: CharacterIdentity
   attributes: Attributes
-  skills: Skill[]
+  skills: CharacterSkill[]
 }
