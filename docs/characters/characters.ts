@@ -34,8 +34,36 @@ export const characters: PlayerCharacter[] = [
       },
       {
         name: 'Pesquisa',
-        level: 1,
+        level: 2,
         bonus: true,
+      },
+      {
+        name: 'Atletismo',
+        level: 2,
+      },
+      {
+        name: 'Reflexos',
+        level: 1,
+      },
+      {
+        name: 'Conhecimentos Ocultos',
+        level: 1,
+      },
+      {
+        name: 'Armas de Fogo',
+        level: 2,
+      },
+      {
+        name: 'Artes Marciais',
+        level: 1,
+      },
+      {
+        name: 'Mecânica',
+        level: 1,
+      },
+      {
+        name: 'Força de Vontade',
+        level: 1,
       },
     ],
   },
