@@ -23,6 +23,11 @@
   background-color: #9f7aea29;
 }
 
+.custom-block.combat {
+  color: var(--vp-custom-block-important-text);
+  background-color: #90ea7a29;
+}
+
 @keyframes candleFlicker {
   0% {
     opacity: 0.6;

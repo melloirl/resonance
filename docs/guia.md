@@ -73,7 +73,6 @@ Elas são combinadas com os atributos para realizar as rolagens.
 :::danger **Reflexos** – reagir a perigos ou surpresas.
 :::
 
-
 ### Investigação e Raciocínio
 :::tip **Investigação** – busca, dedução, análise de cenas.
 :::
@@ -109,6 +108,11 @@ Elas são combinadas com os atributos para realizar as rolagens.
 <div class="custom-block important github-alert"><p class="custom-block-title"><strong>Sexto Sentido</strong> – detectar presenças e perturbações paranormais.</p></div>
 <div class="custom-block important github-alert"><p class="custom-block-title"><strong>Força de Vontade</strong> – resistir à corrupção e à possessão.</p></div>
 <div class="custom-block important github-alert faded"><p class="custom-block-title"><strong>Ritualismo</strong> – interação paranormal avançada, obtida através de ?̴͙̪͙̝͌̽̂̉*̵̨̪͖͎͒͋́̾°̷̼̺͚͉̟͆̍̃(̶̤́ṵ̵̼̼͆̅1̷̩̳̿̉D̷͎̮̮̄̇̉̆4̶͇̱̘͗́͘d̴̲̪͚̭͓̈́̀0̷͔̤͆ͅ</p></div>
+
+### Combate
+<div class="custom-block combat important github-alert"><p class="custom-block-title"><strong>Armas de Fogo</strong> – saberes sobre folclore, lendas urbanas e o paranormal.</p></div>
+<div class="custom-block combat important github-alert"><p class="custom-block-title"><strong>Armas Brancas</strong> – detectar presenças e perturbações paranormais.</p></div>
+<div class="custom-block combat important github-alert"><p class="custom-block-title"><strong>Artes Marciais</strong> – resistir à corrupção e à possessão.</p></div>
 
 ## Ocupações e Bônus Iniciais {#ocupacao}
 
