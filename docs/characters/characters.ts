@@ -58,8 +58,8 @@ export const characters: PlayerCharacter[] = [
       motivation: 'Redenção',
       fear: 'Perda',
       imageOffset: {
-        x: 0,
-        y: 45,
+        x: 45,
+        y: 0,
       },
     },
     attributes: {
