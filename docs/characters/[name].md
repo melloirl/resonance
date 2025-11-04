@@ -67,52 +67,16 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
 </script>
 
 <div v-if="character" :class="$style.character_page">
-  <section :class="$style.character_header">
-    <div :class="$style.character_main">
-      <div :class="$style.character_title_row">
-  <h1 :class="$style.character_name">
-    {{ character.identity.fullName }}
-  </h1>
-  <span :class="[$style.pill, $style.pill_occupation]">
-    {{ character.identity.occupation }}
-  </span>
-</div>
-      <dl :class="$style.character_meta">
-        <div :class="$style.meta_item">
-          <dt>Idade</dt>
-          <dd>{{ character.identity.age }}</dd>
-        </div>
-        <div :class="$style.meta_item">
-          <dt>Gênero</dt>
-          <dd>{{ character.identity.gender }}</dd>
-        </div>
-      </dl>
-      <div :class="$style.character_tags">
-        <div :class="$style.tag_group">
-          <span :class="$style.tag_label">Personalidade</span>
-          <span :class="[$style.chip, $style.chip_personality]">
-            {{ character.identity.personality }}
-          </span>
-        </div>
-        <div :class="$style.tag_group">
-          <span :class="$style.tag_label">Motivação</span>
-          <span :class="[$style.chip, $style.chip_motivation]">
-            {{ character.identity.motivation }}
-          </span>
-        </div>
-        <div :class="$style.tag_group">
-          <span :class="$style.tag_label">Medo</span>
-          <span :class="[$style.chip, $style.chip_fear]">
-            {{ character.identity.fear }}
-          </span>
-        </div>
-      </div>
-    </div>
+  <div :class="$style.character_layout">
+    <aside :class="$style.character_sidebar">
+  <div :class="$style.character_sidebar_card">
     <figure :class="$style.character_portrait">
       <template v-if="hasImage">
         <img
           :src="character.identity.appearanceUrl"
-          :style="{'object-position': `${character.identity.imageOffset.x}% ${character.identity.imageOffset.y}%`}"
+          :style="{
+            'object-position': `${character.identity.imageOffset.x}% ${character.identity.imageOffset.y}%`
+          }"
           :alt="character.identity.fullName"
         />
         <figcaption>Aparência</figcaption>
@@ -124,18 +88,10 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
         <figcaption>Aguardando retrato :(</figcaption>
       </template>
     </figure>
-  </section>
-  <section :class="$style.character_story">
-  <h2>Arquivo - {{subjectName}}</h2>
-  <p :class="$style.character_backstory">
-    {{ character.identity.backstory }}
-  </p>
-</section>
-  <section :class="$style.character_grid">
-    <section :class="$style.character_section">
-  <h2>Atributos</h2>
-  <ul :class="$style.attributes_list">
-    <li :class="$style.attributes_row">
+    <section :class="[$style.character_section, $style.character_attributes]">
+      <h2>Atributos</h2>
+      <ul :class="$style.attributes_list">
+      <li :class="$style.attributes_row">
       <span
         :class="$style.attr_name"
         title="Corpo: força física, resistência e condicionamento."
@@ -203,71 +159,115 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
         {{ formatAttribute(character.attributes.will) }}
       </span>
     </li>
-  </ul>
-  <p :class="$style.hint">
-    <span :class="$style.hint_icon" aria-hidden="true">ℹ︎</span>
-    <span>
-      Atributos variam entre <strong>-3</strong> (fraquíssimo) e
-      <strong>+3</strong> (excepcional).
-    </span>
-  </p>
-</section>
-    <div :class="$style.character_section">
-  <h2>Perícias</h2>
-  <div
-    v-for="domain in filteredDomains"
-    :key="domain"
-    :class="$style.skills_domain_group"
-  >
-    <div :class="$style.skills_domain_header">
-      <span
-        :class="$style.skills_domain_bar"
-        :style="{ backgroundColor: domainColor(domain) }"
-      />
-      <span :class="$style.skills_domain_label">
-        {{ domainLabels[domain] }}
-      </span>
-    </div>
-    <ul :class="$style.skills_list">
-      <li
-        v-for="skill in skillsByDomain(character.skills, domain)"
-        :key="skill.name"
-        :class="$style.skills_row"
-        :style="{ '--skill-domain-color': domainColor(domain) }"
-      >
-        <div :class="$style.skill_main">
-          <div :class="$style.skill_header">
-            <span :class="$style.skill_name">{{ skill.name }}</span>
-            <span :class="$style.skill_level">
-              Lv. {{ skill.level }}
+      </ul>
+      <p :class="$style.hint">
+        <span :class="$style.hint_icon" aria-hidden="true">ℹ︎</span>
+        <span>
+          Atributos variam entre <strong>-3</strong> (fraquíssimo) e
+          <strong>+3</strong> (excepcional).
+        </span>
+      </p>
+    </section>
+  </div>
+</aside>
+    <div :class="$style.character_primary">
+      <section :class="$style.character_header">
+        <div :class="$style.character_main">
+          <div :class="$style.character_title_row">
+            <h1 :class="$style.character_name">
+              {{ character.identity.fullName }}
+            </h1>
+            <span :class="[$style.pill, $style.pill_occupation]">
+              {{ character.identity.occupation }}
             </span>
           </div>
-          <p :class="$style.skill_description">
-            {{ skill.description }}
-          </p>
+          <dl :class="$style.character_meta">
+            <div :class="$style.meta_item">
+              <dt>Idade</dt>
+              <dd>{{ character.identity.age }}</dd>
+            </div>
+            <div :class="$style.meta_item">
+              <dt>Gênero</dt>
+              <dd>{{ character.identity.gender }}</dd>
+            </div>
+          </dl>
+          <div :class="$style.character_tags">
+            <div :class="$style.tag_group">
+              <span :class="$style.tag_label">Personalidade</span>
+              <span :class="[$style.chip, $style.chip_personality]">
+                {{ character.identity.personality }}
+              </span>
+            </div>
+            <div :class="$style.tag_group">
+              <span :class="$style.tag_label">Motivação</span>
+              <span :class="[$style.chip, $style.chip_motivation]">
+                {{ character.identity.motivation }}
+              </span>
+            </div>
+            <div :class="$style.tag_group">
+              <span :class="$style.tag_label">Medo</span>
+              <span :class="[$style.chip, $style.chip_fear]">
+                {{ character.identity.fear }}
+              </span>
+            </div>
+          </div>
         </div>
-        <div :class="$style.skill_meta">
-          <span
-            v-if="skill.bonus"
-            :class="$style.skill_badge"
-            title="+1 de nível concedido pela ocupação"
-          >
-            + Ocupação
-          </span>
-        </div>
-      </li>
-    </ul>
+      </section>
+      <section :class="$style.character_story">
+        <h2>Arquivo - {{ subjectName }}</h2>
+        <p :class="$style.character_backstory">
+          {{ character.identity.backstory }}
+        </p>
+      </section>
+    </div>
   </div>
-  <p :class="$style.hint">
-    Perícias variam entre <strong>0</strong> a <strong>3</strong>.
-    Perícias concedidas por ocupação são consideradas bônus.
-  </p>
-</div>
+  <section :class="[$style.character_section, $style.character_skills_section]">
+    <h2>Perícias</h2>
+    <div
+      v-for="domain in filteredDomains"
+      :key="domain"
+      :class="$style.skills_domain_group"
+    >
+      <div :class="$style.skills_domain_header">
+        <span :class="$style.skills_domain_label">
+          {{ domainLabels[domain] }}
+        </span>
+      </div>
+      <ul :class="$style.skills_list">
+        <li
+          v-for="skill in skillsByDomain(character.skills, domain)"
+          :key="skill.name"
+          :class="$style.skills_row"
+          :style="{ '--skill-domain-color': domainColor(domain) }"
+        >
+          <div :class="$style.skill_main">
+            <div :class="$style.skill_header">
+              <span :class="$style.skill_name">{{ skill.name }}</span>
+              <span :class="$style.skill_level">
+                Lv. {{ skill.level }}
+              </span>
+            </div>
+            <p :class="$style.skill_description">
+              {{ skill.description }}
+            </p>
+          </div>
+          <div :class="$style.skill_meta">
+            <span
+              v-if="skill.bonus"
+              :class="$style.skill_badge"
+              title="+1 de nível concedido pela ocupação"
+            >
+              + Ocupação
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <p :class="$style.hint">
+      Perícias variam entre <strong>0</strong> a <strong>3</strong>.
+      Perícias concedidas por ocupação são consideradas bônus.
+    </p>
   </section>
-</div>
-
-<div v-else :class="$style.character_empty">
-  <p>Personagem não encontrado :(</p>
 </div>
 
 <style module>
@@ -296,6 +296,37 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   }
 }
 
+/* NEW – main two-column layout */
+
+.character_layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.character_primary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.character_sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 840px) {
+  .character_layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) minmax(0, 2fr);
+    gap: 2rem;
+    align-items: flex-start;
+  }
+}
+
+/* Story */
+
 .character_story {
   padding-top: 1.5rem;
   border-top: 1px solid var(--vp-c-divider);
@@ -308,6 +339,8 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   color: var(--vp-c-text-2);
   margin: 0 0 0.5rem;
 }
+
+/* Header - now only text side */
 
 .character_header {
   display: flex;
@@ -326,6 +359,7 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   margin: 0;
   line-height: 1.1;
 }
+
 .character_subtitle {
   margin-bottom: 1rem;
 }
@@ -347,6 +381,8 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   font-size: 0.8rem;
   padding: 0.2rem 0.65rem;
 }
+
+/* Meta + tags as before … */
 
 .character_meta {
   display: flex;
@@ -416,8 +452,10 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   border-color: rgba(220, 30, 80, 0.5);
 }
 
+/* Portrait (now only in sidebar) */
+
 .character_portrait {
-  flex: 0 0 230px;
+  width: 100%;
   overflow: hidden;
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-border);
@@ -429,13 +467,14 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
 .character_portrait img {
   display: block;
   width: 100%;
-  height: 180px;
+  height: auto;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
 }
 
 .portrait_placeholder {
-  flex: 1;
-  min-height: 180px;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -453,9 +492,15 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
 
 .character_portrait figcaption {
   padding: 0.5rem 0.75rem;
-  font-size: 0.75rem;
   color: var(--vp-c-text-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
 }
+
+/* Generic section card */
 
 .character_section {
   background: var(--vp-c-bg-soft);
@@ -484,6 +529,8 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   margin-bottom: 0.75rem;
 }
 
+/* Story text */
+
 .character_backstory {
   line-height: 1.7;
   max-width: 70ch;
@@ -491,37 +538,30 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   margin: 0;
 }
 
-.character_grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
-  align-items: flex-start;
+/* Attributes card (sidebar) */
+
+.character_attributes {
+  padding: 0.9rem 1.25rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  border-radius: 0.9rem;
+  text-align: left;
 }
 
-.character_grid > .character_section:first-child {
-  padding: 0.75rem 1.5rem;
-  min-width: 260px;
-  align-self: start;
-  text-align: right;
-  box-shadow: 0 0 8px rgba(0,0,0,0.12);
+.character_attributes h2 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--vp-c-text-3);
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
-@media (min-width: 840px) {
-  .character_grid > .character_section:first-child {
-    flex-shrink: 0;
-  }
-}
-
-@media (min-width: 840px) {
-  .character_grid {
-    grid-template-columns: 280px minmax(0, 1fr);
-  }
-}
-
-.character_grid > .character_section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.character_attributes .hint {
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--vp-c-text-3);
 }
 
 .attributes_row {
@@ -594,6 +634,15 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   opacity: 0.85;
 }
 
+/* Skills block – now simply a full-width section */
+
+.character_skills_section {
+  /* inherits card look from .character_section */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .skills_row {
   display: flex;
   justify-content: space-between;
@@ -603,8 +652,7 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   gap: 0.75rem;
   border-left: 3px solid var(--skill-domain-color, transparent);
   flex-wrap: wrap;
-  background: rgba(255,255,255,0.02);
-  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
   padding: 0.4rem 0.75rem;
 }
 
@@ -658,11 +706,8 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   font-size: 0.65rem;
   padding: 0.18rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 215, 0, 0.3); 
-  background: rgba(255, 215, 0, 0.05);
-  white-space: nowrap;
-  line-height: 1.2;
-  font-weight: 500;
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  background: rgba(255, 215, 0, 0.04);
 }
 
 .character_empty {
@@ -672,11 +717,7 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
 }
 
 .skills_domain_group {
-  margin-bottom: 1.5rem;
   padding-top: 0.75rem;
-  border-top: 1px solid var(--vp-c-divider);
-  background: rgba(255, 255, 255, 0.015);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
 }
 
 .skills_domain_group:last-of-type {
@@ -687,19 +728,13 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
   font-weight: 600;
   letter-spacing: 0.1em;
 }
 
-.skills_domain_bar {
-  width: 4px;
-  height: 1rem;
-  border-radius: 999px;
-}
-
 .skills_domain_label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -733,7 +768,7 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
 
 .attributes_list,
 .skills_list {
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
   margin: 0;
   list-style: none;
 }
@@ -752,5 +787,43 @@ const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
     align-items: flex-start;
     gap: 0.35rem;
   }
+}
+
+.character_sidebar_card {
+  width: 100%;              /* take full available width on mobile */
+  max-width: 100%;          /* no 320px cap on small screens */
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 840px) {
+  .character_sidebar_card {
+    width: auto;           /* follow grid column */
+    max-width: 320px;      /* optional: keep it neat on large screens */
+    margin: 0 auto;
+  }
+}
+
+/* Portrait inside the card: no own border/shadow */
+.character_sidebar_card .character_portrait {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  background: var(--vp-c-bg-soft);
+}
+
+.character_sidebar_card .character_portrait figcaption {
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.character_sidebar_card .character_attributes {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0.75rem 1.25rem 1rem;
 }
 </style>

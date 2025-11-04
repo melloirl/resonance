@@ -101,7 +101,7 @@ export const characters: PlayerCharacter[] = [
       charisma: -1,
       will: 2,
     },
-    skills: [cs(SkillNames.SEXTO, 1, true), cs(SkillNames.DESTREZA, 1, true)],
+    skills: [cs(SkillNames.SEXTO, 1, true), cs(SkillNames.CONTATOS, 1, true)],
   },
 ]
 
