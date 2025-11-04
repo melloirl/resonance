@@ -69,6 +69,7 @@ const formatAttribute = (value: number) =>
       <template v-if="hasImage">
         <img
           :src="character.identity.appearanceUrl"
+          :style="{'object-position': `${character.identity.imageOffset.x}% ${character.identity.imageOffset.y}%`}"
           :alt="character.identity.fullName"
         />
         <figcaption>Aparência</figcaption>

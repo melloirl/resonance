@@ -8,6 +8,10 @@ export interface CharacterIdentity {
   personality: string
   motivation: string
   fear: string
+  imageOffset: {
+    x: number
+    y: number
+  }
 }
 
 export interface Attributes {

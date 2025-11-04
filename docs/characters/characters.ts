@@ -5,31 +5,6 @@ const slugFromName = (fullName: string) => fullName.trim().split(' ')[0].toLower
 export const characters: PlayerCharacter[] = [
   {
     identity: {
-      fullName: 'Silas Vane',
-      gender: 'Male',
-      age: 27,
-      occupation: 'Forensic Analyst',
-      backstory: 'A young forensic analyst drawn into the mysteries of the supernatural after a string of bizarre cases at the city morgue.',
-      personality: 'Cynical',
-      motivation: 'Truth',
-      fear: 'Oblivion',
-    },
-    attributes: {
-      body: 0,
-      mind: 3,
-      charisma: -1,
-      will: 2,
-    },
-    skills: [
-      { name: 'Investigation', level: 3, bonus: true },
-      { name: 'Medicine', level: 2 },
-      { name: 'Occult', level: 2 },
-      { name: 'Perception', level: 1 },
-      { name: 'Stealth', level: 2 },
-    ],
-  },
-  {
-    identity: {
       fullName: 'Tallulah Paz Trembley',
       gender: 'Mulher Cis',
       age: 31,
@@ -40,6 +15,10 @@ export const characters: PlayerCharacter[] = [
       personality: 'Resiliente',
       motivation: 'Amorosa',
       fear: 'Abandono',
+      imageOffset: {
+        x: 0,
+        y: 0,
+      },
     },
     attributes: {
       body: 3,
@@ -49,25 +28,14 @@ export const characters: PlayerCharacter[] = [
     },
     skills: [
       {
-        name: 'Roteirismo & Narrativa',
-        level: 3,
+        name: 'Contatos',
+        level: 1,
         bonus: true,
       },
       {
         name: 'Pesquisa',
-        level: 2,
-      },
-      {
-        name: 'Investigação informal',
-        level: 2,
-      },
-      {
-        name: 'Empatia',
-        level: 2,
-      },
-      {
-        name: 'Direção em longas distâncias',
         level: 1,
+        bonus: true,
       },
     ],
   },
@@ -83,6 +51,10 @@ export const characters: PlayerCharacter[] = [
       personality: 'Rebelde',
       motivation: 'Redenção',
       fear: 'Perda',
+      imageOffset: {
+        x: 0,
+        y: 45,
+      },
     },
     attributes: {
       body: -1,
@@ -135,6 +107,10 @@ export const characters: PlayerCharacter[] = [
       personality: 'Ranzinza',
       motivation: 'Justiça',
       fear: 'Altura e Cachorros',
+      imageOffset: {
+        x: 0,
+        y: 15,
+      },
     },
     attributes: {
       body: 3,
