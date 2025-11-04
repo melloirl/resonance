@@ -123,6 +123,38 @@ export const characters: PlayerCharacter[] = [
       },
     ],
   },
+  {
+    identity: {
+      fullName: 'Oliver Boucher Bergman',
+      gender: 'Homem Cis',
+      age: 55,
+      occupation: 'Ex-minerador | Dono de Bar',
+      appearanceUrl: 'https://i.imgur.com/peVYrKn.jpeg',
+      backstory:
+        'Oliver Boucher Bergman, conhecido como "Velho Canarrí", nasceu e viveu toda a vida em Welderhide. Descendente de imigrantes europeus que ajudaram a fundar a cidade no século XIX, começou a trabalhar nas minas ainda jovem. Fraco de corpo, mas dono de uma percepção aguçada, ganhou respeito entre os colegas por seu estranho talento em prever acidentes e desastres nas galerias subterrâneas. Tornou-se uma figura importante no sindicato dos mineradores, lutando por melhores condições e denunciando abusos da Eidolon. Após o fechamento das minas, foi demitido e perdeu quase tudo, mas junto de alguns amigos abriu um pequeno bar — um refúgio para os velhos mineradores e um lembrete do passado da cidade. Amargurado e teimoso, Oliver continua investigando a Eidolon por conta própria, guiado mais pela raiva e nostalgia do que pela esperança.',
+      personality: 'Ranzinza',
+      motivation: 'Justiça',
+      fear: 'Altura e Cachorros',
+    },
+    attributes: {
+      body: 3,
+      mind: 2,
+      charisma: -1,
+      will: 2,
+    },
+    skills: [
+      {
+        name: 'Sexto Sentido',
+        level: 1,
+        bonus: true,
+      },
+      {
+        name: 'Destreza',
+        level: 1,
+        bonus: true,
+      },
+    ],
+  },
 ]
 
 export const getSlugForCharacter = (character: PlayerCharacter): string => slugFromName(character.identity.fullName)
