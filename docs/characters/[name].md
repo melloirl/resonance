@@ -183,11 +183,20 @@ const formatAttribute = (value: number) =>
 <style module>
 .character_page {
   max-width: 980px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem 0 4rem;
+  padding: 1.75rem 1.25rem 3.5rem;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+@media (min-width: 840px) {
+  .character_page {
+    padding-inline: 0;
+    padding-top: 2.5rem;
+  }
 }
 
 .character_header {
