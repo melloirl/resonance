@@ -186,6 +186,36 @@ export const characters: PlayerCharacter[] = [
       resonance: 0.05,
     },
   },
+  {
+    identity: {
+      fullName: 'Michael Silas Campbell',
+      gender: 'Homem Cis',
+      age: 26,
+      occupation: 'Legista',
+      appearanceUrl: '',
+      backstory:
+        'Silas nasceu em uma família tranquila e pacata, na cidade de Toronto, no Canadá. Ao lado dos pais e da irmã mais nova, cresceu em um ambiente harmonioso, sem precisar lidar com grandes conflitos até os oito anos de idade, quando sua irmã mais velha desapareceu repentinamente em um dia comum. Alicia, então uma estudante do ensino médio, simplesmente não voltou para casa. O desaparecimento abalou profundamente a família, que passou meses se movimentando incansavelmente em busca de respostas, sem jamais desistir de encontrá-la.\n\n Aos 14 anos, Silas começou a ter “vislumbres” da irmã desaparecida. Ele afirmava vê-la e conversar com ela, como se ainda estivesse por perto, observando-o à distância. Foi então que percebeu que, talvez, Alicia realmente não estivesse mais neste mundo  e que, por mais que quisesse, nada poderia fazer por ela naquele momento.\n\n A partir daí, sua mente passou a pregá-lo peças com frequência. Silas começou a se comunicar não apenas com a irmã supostamente falecida, mas também com outras pessoas que ninguém mais conseguia ver. Aquilo despertava nele tanto medo quanto curiosidade. Os pais, desesperados, buscaram toda a ajuda possível e, na tentativa de recomeçar, decidiram se mudar para Ontário, acreditando que uma nova vida e novas memórias poderiam amenizar o trauma da perda e o sofrimento do filho. Mas, apesar dos esforços, as visões nunca cessaram.\n\n Com o passar dos anos, Silas aprendeu a lidar com a própria mente e a conviver com as vozes e presenças que o acompanhavam. Acostumou-se a nunca mais estar realmente sozinho. E foi assim que decidiu dedicar sua vida ao que mais entendia: cuidar daqueles que já partiram.',
+      personality: 'Sereno',
+      motivation: 'Propósito',
+      fear: 'Perda',
+      imageOffset: {
+        x: 0,
+        y: 0,
+      },
+    },
+    attributes: {
+      body: 0,
+      mind: 3,
+      charisma: 2,
+      will: 1,
+    },
+    skills: [cs(SkillNames.MEDICINA, 1, true), cs(SkillNames.SEXTO, 1, true)],
+    status: {
+      body: BodyState.HEALTHY,
+      mind: MindState.SANE,
+      resonance: 0.1,
+    },
+  },
 ]
 
 export const getSlugForCharacter = (character: PlayerCharacter): string => slugFromName(character.identity.fullName)
