@@ -1,4 +1,5 @@
-import type { PlayerCharacter } from './character'
+import type { PlayerCharacter } from './player'
+import { BodyState, MindState } from './player'
 import { getSkill, SkillNames } from './skills'
 
 const slugFromName = (fullName: string) => fullName.trim().split(' ')[0].toLowerCase()
@@ -44,6 +45,11 @@ export const characters: PlayerCharacter[] = [
       cs(SkillNames.MECANICA, 1),
       cs(SkillNames.VONTADE, 1),
     ],
+    status: {
+      body: BodyState.HEALTHY,
+      mind: MindState.SANE,
+      resonance: 0.05,
+    },
   },
   {
     identity: {
@@ -77,6 +83,11 @@ export const characters: PlayerCharacter[] = [
       cs(SkillNames.PERSUASAO, 2),
       cs(SkillNames.CONHECIMENTO, 2),
     ],
+    status: {
+      body: BodyState.HEALTHY,
+      mind: MindState.SANE,
+      resonance: 0.05,
+    },
   },
   {
     identity: {
@@ -102,6 +113,78 @@ export const characters: PlayerCharacter[] = [
       will: 2,
     },
     skills: [cs(SkillNames.SEXTO, 1, true), cs(SkillNames.CONTATOS, 1, true)],
+    status: {
+      body: BodyState.HEALTHY,
+      mind: MindState.SANE,
+      resonance: 0.05,
+    },
+  },
+  {
+    identity: {
+      fullName: 'Leo Wen (温凉)',
+      gender: 'Homem Cis',
+      age: 24,
+      occupation: 'Caixa de Conveniência',
+      appearanceUrl: 'https://i.imgur.com/peVYrKn.jpeg',
+      backstory:
+        'Oliver Boucher Bergman, conhecido como "Velho Canarrí", nasceu e viveu toda a vida em Welderhide.\n\n Descendente de imigrantes europeus que ajudaram a fundar a cidade no século XIX, começou a trabalhar nas minas ainda jovem. Fraco de corpo, mas dono de uma percepção aguçada, ganhou respeito entre os colegas por seu estranho talento em prever acidentes e desastres nas galerias subterrâneas. \n\n Tornou-se uma figura importante no sindicato dos mineradores, lutando por melhores condições e denunciando abusos da Eidolon.\n\n Após o fechamento das minas, foi demitido e perdeu quase tudo, mas junto de alguns amigos abriu um pequeno bar — um refúgio para os velhos mineradores e um lembrete do passado da cidade.\n\n Amargurado e teimoso, Oliver continua investigando a Eidolon por conta própria, guiado mais pela raiva e nostalgia do que pela esperança.',
+      personality: 'Prestativa',
+      motivation: 'Família',
+      fear: 'Morte',
+      imageOffset: {
+        x: 0,
+        y: 15,
+      },
+    },
+    attributes: {
+      body: 3,
+      mind: 2,
+      charisma: -1,
+      will: 2,
+    },
+    skills: [cs(SkillNames.SEXTO, 1, true), cs(SkillNames.CONTATOS, 1, true)],
+    status: {
+      body: BodyState.HEALTHY,
+      mind: MindState.SANE,
+      resonance: 0.05,
+    },
+  },
+  {
+    identity: {
+      fullName: 'Vivienne Paradis',
+      gender: 'Mulher Cis',
+      age: 26,
+      occupation: 'Enfermeira',
+      appearanceUrl: 'https://i.imgur.com/bhFsIPr.jpeg',
+      backstory: 'Ela é uma garotinha muito divertida.',
+      personality: 'Perfeccionista',
+      motivation: 'Felicidade',
+      fear: 'Vazio',
+      imageOffset: {
+        x: 0,
+        y: 0,
+      },
+    },
+    attributes: {
+      body: 2,
+      mind: 0,
+      charisma: 2,
+      will: 2,
+    },
+    skills: [
+      cs(SkillNames.MEDICINA, 4, true),
+      cs(SkillNames.EMPATIA, 1, true),
+      cs(SkillNames.DESTREZA, 1),
+      cs(SkillNames.FURTIVIDADE, 1),
+      cs(SkillNames.REFLEXOS, 1),
+      cs(SkillNames.PSICOLOGIA, 2),
+      cs(SkillNames.SEXTO, 2),
+    ],
+    status: {
+      body: BodyState.HEALTHY,
+      mind: MindState.SANE,
+      resonance: 0.05,
+    },
   },
 ]
 

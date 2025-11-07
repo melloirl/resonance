@@ -9,6 +9,7 @@ import { useData } from 'vitepress'
 import { findCharacterBySlug } from './characters'
 import { Domain, getDomainColor } from './skills'
 import type { CharacterSkill } from './skills'
+import { BodyState, MindState } from './player'
 
 const { params } = useData()
 
@@ -21,11 +22,21 @@ const hasImage = computed(
   () => !!character.value?.identity.appearanceUrl
 )
 
+const resonanceOpacity = computed(() => {
+  if (!character.value?.status) return 0
+
+  const value = character.value.status.resonance
+  if (Number.isNaN(value)) return 0
+
+  return Math.min(1, Math.max(0, value))
+})
+
 const subjectName = computed(() => {
   if (!character.value) return ''
-  const parts = character.value.identity.fullName.split(' ')
+  const parts = character.value.identity.fullName.split(' ').filter((part) =>
+    /^[A-Za-zÀ-ÖØ-öø-ÿ'-]+$/.test(part)
+  )
   if (parts.length === 1) return parts[0]
-  // middle and last names initials
   const initials = parts.slice(1).map((n) => n[0].toUpperCase() + '.').join(' ')
   return `${parts[0]} ${initials}`
 })
@@ -64,766 +75,311 @@ const filteredDomains = computed(() => {
 
 const skillsByDomain = (skills: CharacterSkill[], domain: Domain) =>
   skills.filter((skill) => skill.domain === domain)
+
+const bodyStatusLabel = (state: BodyState): string => {
+  switch (state) {
+    case BodyState.HEALTHY:
+      return 'Saudável'
+    case BodyState.HURT:
+      return 'Ferido'
+    case BodyState.DEEP_WOUNDS:
+      return 'Feridas Graves'
+  }
+}
+
+const mindStatusLabel = (state: MindState): string => {
+  switch (state) {
+    case MindState.SANE:
+      return 'Lúcido'
+    case MindState.UNSTABLE:
+      return 'Abalado'
+    case MindState.INSANE:
+      return 'Quebrado'
+  }
+}
+
+const bodyStatusClass = computed(() => {
+  const state = character.value?.status.body
+
+  switch (state) {
+    case BodyState.HEALTHY:
+      return 'border-[rgba(0,180,120,0.5)] bg-[rgba(0,180,120,0.08)] text-[rgba(0,200,140,0.9)]'
+    case BodyState.HURT:
+      return 'border-[rgba(255,190,60,0.55)] bg-[rgba(255,190,60,0.08)] text-[rgba(255,210,120,0.95)]'
+    case BodyState.DEEP_WOUNDS:
+      return 'border-[rgba(220,30,80,0.6)] bg-[rgba(220,30,80,0.08)] text-[rgba(255,150,170,0.95)]'
+    default:
+      return 'border-[color:var(--vp-c-border)] bg-[rgba(255,255,255,0.02)] text-[color:var(--vp-c-text-2)]'
+  }
+})
+
+const mindStatusClass = computed(() => {
+  const state = character.value?.status.mind
+
+  switch (state) {
+    case MindState.SANE:
+      return 'border-[rgba(0,180,120,0.5)] bg-[rgba(0,180,120,0.08)] text-[rgba(0,200,140,0.9)]'
+    case MindState.UNSTABLE:
+      return 'border-[rgba(120,140,255,0.55)] bg-[rgba(120,140,255,0.08)] text-[rgba(180,195,255,0.95)]'
+    case MindState.INSANE:
+      return 'border-[rgba(160,60,255,0.6)] bg-[rgba(160,60,255,0.08)] text-[rgba(220,170,255,0.96)]'
+    default:
+      return 'border-[color:var(--vp-c-border)] bg-[rgba(255,255,255,0.02)] text-[color:var(--vp-c-text-2)]'
+  }
+})
+
 </script>
 
-<div v-if="character" :class="$style.character_page">
-  <div :class="$style.character_layout">
-    <aside :class="$style.character_sidebar">
-  <div :class="$style.character_sidebar_card">
-    <figure :class="$style.character_portrait">
-      <template v-if="hasImage">
-        <img
-          :src="character.identity.appearanceUrl"
-          :style="{
-            'object-position': `${character.identity.imageOffset.x}% ${character.identity.imageOffset.y}%`
-          }"
-          :alt="character.identity.fullName"
-        />
-        <figcaption>Aparência</figcaption>
-      </template>
-      <template v-else>
-        <div :class="$style.portrait_placeholder">
-          <span>Sem aparência disponível</span>
-        </div>
-        <figcaption>Aguardando retrato :(</figcaption>
-      </template>
-    </figure>
-    <section :class="[$style.character_section, $style.character_attributes]">
-      <h2>Atributos</h2>
-      <ul :class="$style.attributes_list">
-      <li :class="$style.attributes_row">
-      <span
-        :class="$style.attr_name"
-        title="Corpo: força física, resistência e condicionamento."
-      >
-        Corpo
-      </span>
-      <span
-        :class="{
-          [$style.attr_value]: true,
-          [$style.attr_positive]: character.attributes.body > 0,
-          [$style.attr_negative]: character.attributes.body < 0
-        }"
-      >
-        {{ formatAttribute(character.attributes.body) }}
-      </span>
-    </li>
-    <li :class="$style.attributes_row">
-      <span
-        :class="$style.attr_name"
-        title="Mente: raciocínio, memória e foco."
-      >
-        Mente
-      </span>
-      <span
-        :class="{
-          [$style.attr_value]: true,
-          [$style.attr_positive]: character.attributes.mind > 0,
-          [$style.attr_negative]: character.attributes.mind < 0
-        }"
-      >
-        {{ formatAttribute(character.attributes.mind) }}
-      </span>
-    </li>
-    <li :class="$style.attributes_row">
-      <span
-        :class="$style.attr_name"
-        title="Carisma: presença, empatia e capacidade de influência."
-      >
-        Carisma
-      </span>
-      <span
-        :class="{
-          [$style.attr_value]: true,
-          [$style.attr_positive]: character.attributes.charisma > 0,
-          [$style.attr_negative]: character.attributes.charisma < 0
-        }"
-      >
-        {{ formatAttribute(character.attributes.charisma) }}
-      </span>
-    </li>
-    <li :class="$style.attributes_row">
-      <span
-        :class="$style.attr_name"
-        title="Vontade: determinação, coragem e resiliência mental."
-      >
-        Vontade
-      </span>
-      <span
-        :class="{
-          [$style.attr_value]: true,
-          [$style.attr_positive]: character.attributes.will > 0,
-          [$style.attr_negative]: character.attributes.will < 0
-        }"
-      >
-        {{ formatAttribute(character.attributes.will) }}
-      </span>
-    </li>
-      </ul>
-      <p :class="$style.hint">
-        <span :class="$style.hint_icon" aria-hidden="true">ℹ︎</span>
-        <span>
-          Atributos variam entre <strong>-3</strong> (fraquíssimo) e
-          <strong>+3</strong> (excepcional).
-        </span>
-      </p>
-    </section>
-  </div>
-</aside>
-    <div :class="$style.character_primary">
-      <section :class="$style.character_header">
-        <div :class="$style.character_main">
-          <div :class="$style.character_title_row">
-            <h1 :class="$style.character_name">
+<div class="max-w-5xl w-full mx-auto pt-7 pb-14 px-5 box-border flex flex-col md:px-0 md:pt-10">
+  <div
+    class="flex flex-col gap-8 min-[840px]:grid min-[840px]:grid-cols-[minmax(320px,1fr)_minmax(0,2fr)] min-[840px]:items-start">
+    <aside class="flex flex-col gap-6">
+      <div
+        class="w-full max-w-full bg-[color:var(--vp-c-bg-soft)] border border-[color:var(--vp-c-border)] rounded-2xl overflow-hidden shadow-[0_0_12px_rgba(0,0,0,0.15)] min-[840px]:w-auto min-[840px]:max-w-[320px] min-[840px]:!mx-auto">
+        <figure class="w-full overflow-hidden bg-[color:var(--vp-c-bg-soft)] flex flex-col justify-between !m-0">
+          <template v-if="hasImage">
+            <div class="relative w-full overflow-hidden">
+              <img :src="character.identity.appearanceUrl" :style="{
+                'object-position': `${character.identity.imageOffset.x}% ${character.identity.imageOffset.y}%`
+              }" :alt="character.identity.fullName" class="block w-full h-auto aspect-[3/4] object-cover" />
+              <div class="mt-3 flex absolute bottom-0 bg-[color:var(--vp-c-bg-soft)] w-full gap-2 text-left px-4 py-2 items-center justify-between">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[0.72rem] font-bold uppercase tracking-[0.09em] text-[color:var(--vp-c-text-1)]">
+                    FÍSICO
+                  </span>
+                  <span class="px-[0.6rem] py-[0.18rem] rounded-full text-[0.75rem] border bg-[rgba(255,255,255,0.02)]"
+                    :class="bodyStatusClass">
+                    {{ bodyStatusLabel(character.status.body) }}
+                  </span>
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[0.72rem] font-bold uppercase tracking-[0.09em] text-[color:var(--vp-c-text-1)]">
+                    MENTAL
+                  </span>
+                  <span class="px-[0.6rem] py-[0.18rem] rounded-full text-[0.75rem] border bg-[rgba(255,255,255,0.02)]"
+                    :class="mindStatusClass">
+                    {{ mindStatusLabel(character.status.mind) }}
+                  </span>
+                </div>
+              </div>
+              <div class="inset-0 absolute tv-static bg-blend-soft-light" :style="{ opacity: resonanceOpacity }"></div>
+            </div>
+            <figcaption
+              class="border-t border-[color:var(--vp-c-divider)] !px-3 !py-2 text-[0.9rem] font-semibold uppercase !tracking-[0.08em] text-[color:var(--vp-c-text-2)] text-center">
+              Aparência
+            </figcaption>
+          </template>
+          <template v-else>
+            <div
+              class="w-full aspect-[3/4] flex items-center justify-center !p-3 !text-[0.8rem] !text-[color:var(--vp-c-text-2)] bg-[repeating-linear-gradient(135deg,_rgba(255,255,255,0.02),_rgba(255,255,255,0.02)_6px,_rgba(255,255,255,0.04)_6px,_rgba(255,255,255,0.04)_12px)]">
+              <span>Sem aparência disponível</span>
+            </div>
+            <figcaption
+              class="border-t border-[color:var(--vp-c-divider)] !px-3 !py-2 text-[0.9rem] font-semibold uppercase !tracking-[0.08em] text-[color:var(--vp-c-text-2)] text-center">
+              Aguardando retrato :(
+            </figcaption>
+          </template>
+        </figure>
+        <section class="bg-[color:var(--vp-c-bg-soft)] !px-5 !py-4  text-left !mt-4 min-[840px]:!mt-0">
+          <h2
+            class="!text-[0.8rem] !font-semibold uppercase !tracking-[0.09em] !text-[color:var(--vp-c-text-3)] border-b border-[color:var(--vp-c-divider)] !pb-1 !mb-2">
+            Atributos
+          </h2>
+          <ul class="list-none !p-[0.25rem_0] !m-0">
+            <!-- Corpo -->
+            <li
+              class="flex justify-between items-center !py-[0.35rem] border-b border-[color:var(--vp-c-divider)] last:border-b-0">
+              <span class="font-medium text-left">
+                Corpo
+              </span>
+              <span
+                class="tabular-nums text-right min-w-[2.5rem] inline-block relative !pb-[0.1rem] text-[color:var(--vp-c-text-3)] after:content-[''] after:inline-block after:w-5 after:h-1 after:bg-[color:var(--vp-c-divider)] after:rounded-[2px] after:!ml-[0.15rem] after:relative after:-top-px"
+                :class="{
+                  '!text-[color:var(--vp-c-brand-1)] after:!bg-[color:var(--vp-c-brand-1)]':
+                    character.attributes.body > 0,
+                  '!text-[color:var(--vp-c-danger-2)] after:!bg-[color:var(--vp-c-danger-2)]':
+                    character.attributes.body < 0
+                }">
+                {{ formatAttribute(character.attributes.body) }}
+              </span>
+            </li>
+            <li
+              class="flex justify-between items-center !py-[0.35rem] border-b border-[color:var(--vp-c-divider)] last:border-b-0">
+              <span class="font-medium text-left">
+                Mente
+              </span>
+              <span
+                class="tabular-nums text-right min-w-[2.5rem] inline-block relative !pb-[0.1rem] text-[color:var(--vp-c-text-3)] after:content-[''] after:inline-block after:w-5 after:h-1 after:bg-[color:var(--vp-c-divider)] after:rounded-[2px] after:!ml-[0.15rem] after:relative after:-top-px"
+                :class="{
+                  '!text-[color:var(--vp-c-brand-1)] after:!bg-[color:var(--vp-c-brand-1)]':
+                    character.attributes.mind > 0,
+                  '!text-[color:var(--vp-c-danger-2)] after:!bg-[color:var(--vp-c-danger-2)]':
+                    character.attributes.mind < 0
+                }">
+                {{ formatAttribute(character.attributes.mind) }}
+              </span>
+            </li>
+            <li
+              class="flex justify-between items-center !py-[0.35rem] border-b border-[color:var(--vp-c-divider)] last:border-b-0">
+              <span class="font-medium text-left">
+                Carisma
+              </span>
+              <span
+                class="tabular-nums text-right min-w-[2.5rem] inline-block relative !pb-[0.1rem] text-[color:var(--vp-c-text-3)] after:content-[''] after:inline-block after:w-5 after:h-1 after:bg-[color:var(--vp-c-divider)] after:rounded-[2px] after:!ml-[0.15rem] after:relative after:-top-px"
+                :class="{
+                  '!text-[color:var(--vp-c-brand-1)] after:!bg-[color:var(--vp-c-brand-1)]':
+                    character.attributes.charisma > 0,
+                  '!text-[color:var(--vp-c-danger-2)] after:!bg-[color:var(--vp-c-danger-2)]':
+                    character.attributes.charisma < 0
+                }">
+                {{ formatAttribute(character.attributes.charisma) }}
+              </span>
+            </li>
+            <!-- Vontade -->
+            <li
+              class="flex justify-between items-center py-[0.35rem] border-b border-[color:var(--vp-c-divider)] last:border-b-0">
+              <span class="font-medium text-left">
+                Vontade
+              </span>
+              <span
+                class="tabular-nums text-right min-w-[2.5rem] inline-block relative pb-[0.1rem] text-[color:var(--vp-c-text-3)] after:content-[''] after:inline-block after:w-5 after:h-1 after:bg-[color:var(--vp-c-divider)] after:rounded-[2px] after:ml-[0.15rem] after:relative after:-top-px"
+                :class="{
+                  '!text-[color:var(--vp-c-brand-1)] after:!bg-[color:var(--vp-c-brand-1)]':
+                    character.attributes.will > 0,
+                  '!text-[color:var(--vp-c-danger-2)] after:!bg-[color:var(--vp-c-danger-2)]':
+                    character.attributes.will < 0
+                }">
+                {{ formatAttribute(character.attributes.will) }}
+              </span>
+            </li>
+          </ul>
+          <p class="!mt-[.6rem] !text-[0.75rem] !leading-[1.5] !text-[color:var(--vp-c-text-3)] text-left">
+            <span class="!text-[0.9rem] !leading-none !mt-[0.15rem] opacity-85" aria-hidden="true">
+              ℹ︎
+            </span>
+            <span>
+              Atributos variam entre <strong>-3</strong> (fraquíssimo) e
+              <strong>+3</strong> (excepcional).
+            </span>
+          </p>
+        </section>
+      </div>
+    </aside>
+    <div class="flex flex-col gap-6">
+      <section class="flex flex-wrap gap-8 items-start">
+        <div class="flex-1 basis-[280px]">
+          <div
+            class="flex flex-wrap items-baseline gap-3 mb-3 max-[599px]:flex-col max-[599px]:items-start max-[599px]:gap-[0.35rem]">
+            <h1 class="!text-[2rem] !font-bold !leading-[1.1] !m-0 !text-[color:var(--vp-c-text-1)]">
               {{ character.identity.fullName }}
             </h1>
-            <span :class="[$style.pill, $style.pill_occupation]">
+            <span
+              class="inline-flex items-center px-[0.65rem] py-[0.2rem] rounded-full text-[0.8rem] tracking-[0.02em] uppercase border border-[color:var(--vp-c-border)] bg-[color:var(--vp-c-bg-soft)] text-[color:var(--vp-c-text-1)]">
               {{ character.identity.occupation }}
             </span>
           </div>
-          <dl :class="$style.character_meta">
-            <div :class="$style.meta_item">
-              <dt>Idade</dt>
-              <dd>{{ character.identity.age }}</dd>
+          <dl class="flex gap-6 m-0 mb-8 text-[0.9rem] max-[520px]:flex-col max-[520px]:gap-3">
+            <div>
+              <dt class="text-[0.75rem] uppercase tracking-[0.08em] text-[color:var(--vp-c-text-3)]">
+                Idade
+              </dt>
+              <dd class="m-0 mt-[0.1rem] text-[0.9rem] font-medium text-[color:var(--vp-c-text-1)]">
+                {{ character.identity.age }}
+              </dd>
             </div>
-            <div :class="$style.meta_item">
-              <dt>Gênero</dt>
-              <dd>{{ character.identity.gender }}</dd>
+            <div>
+              <dt class="text-[0.75rem] uppercase tracking-[0.08em] text-[color:var(--vp-c-text-3)]">
+                Gênero
+              </dt>
+              <dd class="m-0 mt-[0.1rem] text-[0.9rem] font-medium text-[color:var(--vp-c-text-1)]">
+                {{ character.identity.gender }}
+              </dd>
             </div>
           </dl>
-          <div :class="$style.character_tags">
-            <div :class="$style.tag_group">
-              <span :class="$style.tag_label">Personalidade</span>
-              <span :class="[$style.chip, $style.chip_personality]">
+          <div class="flex flex-wrap gap-y-3 gap-x-6 text-[color:var(--vp-c-text-1)]">
+            <div class="flex items-center gap-[0.4rem]">
+              <span class="text-[0.75rem] uppercase tracking-[0.08em] text-[color:var(--vp-c-text-2)]">
+                Personalidade
+              </span>
+              <span
+                class="px-[0.7rem] py-[0.25rem] rounded-full text-[0.8rem] border border-[color:var(--vp-c-border)] bg-[rgba(255,255,255,0.02)]">
                 {{ character.identity.personality }}
               </span>
             </div>
-            <div :class="$style.tag_group">
-              <span :class="$style.tag_label">Motivação</span>
-              <span :class="[$style.chip, $style.chip_motivation]">
+            <div class="flex items-center gap-[0.4rem]">
+              <span class="text-[0.75rem] uppercase tracking-[0.08em] text-[color:var(--vp-c-text-2)]">
+                Motivação
+              </span>
+              <span
+                class="px-[0.7rem] py-[0.25rem] rounded-full text-[0.8rem] border border-[rgba(0,180,120,0.5)] bg-[rgba(0,180,120,0.08)]">
                 {{ character.identity.motivation }}
               </span>
             </div>
-            <div :class="$style.tag_group">
-              <span :class="$style.tag_label">Medo</span>
-              <span :class="[$style.chip, $style.chip_fear]">
+            <div class="flex items-center gap-[0.4rem]">
+              <span class="text-[0.75rem] uppercase tracking-[0.08em] text-[color:var(--vp-c-text-2)]">
+                Medo
+              </span>
+              <span
+                class="px-[0.7rem] py-[0.25rem] rounded-full text-[0.8rem] border border-[rgba(220,30,80,0.5)] bg-[rgba(220,30,80,0.08)]">
                 {{ character.identity.fear }}
               </span>
             </div>
           </div>
         </div>
       </section>
-      <section :class="$style.character_story">
-        <h2>Arquivo - {{ subjectName }}</h2>
-        <p :class="$style.character_backstory">
+      <section class="pt-6 border-t border-[color:var(--vp-c-divider)]">
+        <h2 class="!text-[0.9rem] uppercase !tracking-[0.14em] !text-[color:var(--vp-c-text-2)] !m-0 !mb-2">
+          Arquivo - {{ subjectName }}
+        </h2>
+        <p class="leading-[1.7] max-w-[70ch] whitespace-pre-line m-0 text-[color:var(--vp-c-text-1)]">
           {{ character.identity.backstory }}
         </p>
       </section>
     </div>
   </div>
-  <section :class="[$style.character_section, $style.character_skills_section]">
-    <h2>Perícias</h2>
-    <div
-      v-for="domain in filteredDomains"
-      :key="domain"
-      :class="$style.skills_domain_group"
-    >
-      <div :class="$style.skills_domain_header">
-        <span :class="$style.skills_domain_label">
+  <section
+    class="mt-6 bg-[color:var(--vp-c-bg-soft)] px-7 py-6 border border-[color:var(--vp-c-border)] rounded-2xl shadow-[0_0_12px_rgba(0,0,0,0.15)] flex flex-col justify-between">
+    <h2
+      class="!text-[0.9rem] !font-semibold uppercase !tracking-[0.08em] text-[color:var(--vp-c-text-2)] border-b border-[color:var(--vp-c-divider)] !pb-[0.35rem] !mb-3">
+      Perícias
+    </h2>
+    <div v-for="domain in filteredDomains" :key="domain" class="!pt-3 last:!mb-0 min-[840px]:relative">
+      <div
+        class="flex items-center gap-2 mb-[0.1rem] font-semibold tracking-[0.1em] min-[840px]:sticky min-[840px]:top-6 min-[840px]:z-[1] min-[840px]:bg-inherit min-[840px]:py-1">
+        <span class="text-base font-semibold uppercase tracking-[0.08em] text-[color:var(--vp-c-text-1)]">
           {{ domainLabels[domain] }}
         </span>
       </div>
-      <ul :class="$style.skills_list">
-        <li
-          v-for="skill in skillsByDomain(character.skills, domain)"
-          :key="skill.name"
-          :class="$style.skills_row"
+      <ul class="list-none p-[0.25rem_0] m-0">
+        <li v-for="skill in skillsByDomain(character.skills, domain)" :key="skill.name"
           :style="{ '--skill-domain-color': domainColor(domain) }"
-        >
-          <div :class="$style.skill_main">
-            <div :class="$style.skill_header">
-              <span :class="$style.skill_name">{{ skill.name }}</span>
-              <span :class="$style.skill_level">
+          class="flex justify-between items-start gap-3 border-b border-[color:var(--vp-c-divider)] border-l-[3px] border-l-[color:var(--skill-domain-color,_transparent)] bg-[rgba(255,255,255,0.02)] px-3 py-[0.4rem] flex-wrap min-[720px]:flex-nowrap min-[720px]:items-baseline last:border-b-0 ">
+          <div class="flex-1 flex flex-direction flex-col gap-1">
+            <div class="flex items-baseline gap-2">
+              <span class="font-medium">
+                {{ skill.name }}
+              </span>
+              <span class="text-[0.85rem] text-[color:var(--vp-c-text-2)]">
                 Lv. {{ skill.level }}
               </span>
             </div>
-            <p :class="$style.skill_description">
+            <p class="m-0 text-[0.85rem] leading-[1.4] text-[color:var(--vp-c-text-2)]">
               {{ skill.description }}
             </p>
           </div>
-          <div :class="$style.skill_meta">
-            <span
-              v-if="skill.bonus"
-              :class="$style.skill_badge"
-              title="+1 de nível concedido pela ocupação"
-            >
+          <div class="flex flex-col items-center">
+            <span v-if="skill.bonus"
+              class="text-[0.65rem] px-[0.6rem] py-[0.18rem] rounded-full border border-[rgba(255,215,0,0.25)] bg-[rgba(255,215,0,0.04)]"
+              title="+1 de nível concedido pela ocupação">
               + Ocupação
             </span>
           </div>
         </li>
       </ul>
     </div>
-    <p :class="$style.hint">
+    <p class="!mt-5 !text-[0.8rem] !leading-[1.5] !text-[color:var(--vp-c-text-3)] !text-left">
       Perícias variam entre <strong>0</strong> a <strong>3</strong>.
       Perícias concedidas por ocupação são consideradas bônus.
     </p>
   </section>
 </div>
-
-<style module>
-.character_page {
-  max-width: 980px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 1.75rem 1.25rem 3.5rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-.character_page h2 {
-  margin: 0 0 0.5rem;
-}
-
-.character_page > * + * {
-  margin-top: 2.5rem;
-}
-
-@media (min-width: 840px) {
-  .character_page {
-    padding-inline: 0;
-    padding-top: 2.5rem;
-  }
-}
-
-/* NEW – main two-column layout */
-
-.character_layout {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.character_primary {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.character_sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-@media (min-width: 840px) {
-  .character_layout {
-    display: grid;
-    grid-template-columns: minmax(320px, 1fr) minmax(0, 2fr);
-    gap: 2rem;
-    align-items: flex-start;
-  }
-}
-
-/* Story */
-
-.character_story {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--vp-c-divider);
-}
-
-.character_story h2 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--vp-c-text-2);
-  margin: 0 0 0.5rem;
-}
-
-/* Header - now only text side */
-
-.character_header {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.character_main {
-  flex: 1 1 280px;
-}
-
-.character_name {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.1;
-}
-
-.character_subtitle {
-  margin-bottom: 1rem;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  border: 1px solid var(--vp-c-border);
-}
-
-.pill_occupation {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  font-size: 0.8rem;
-  padding: 0.2rem 0.65rem;
-}
-
-/* Meta + tags as before … */
-
-.character_meta {
-  display: flex;
-  gap: 1.5rem;
-  margin: 0 0 2rem;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 520px) {
-  .character_meta {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-}
-
-.meta_item dt {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--vp-c-text-3);
-}
-
-.meta_item dd {
-  margin: 0.1rem 0 0;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--vp-c-text-1);
-}
-
-.character_tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-}
-
-.tag_group {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.tag_label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--vp-c-text-2);
-}
-
-.chip {
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  border: 1px solid var(--vp-c-border);
-}
-
-.chip_personality {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.chip_motivation {
-  background: rgba(0, 180, 120, 0.08);
-  border-color: rgba(0, 180, 120, 0.5);
-}
-
-.chip_fear {
-  background: rgba(220, 30, 80, 0.08);
-  border-color: rgba(220, 30, 80, 0.5);
-}
-
-/* Portrait (now only in sidebar) */
-
-.character_portrait {
-  width: 100%;
-  overflow: hidden;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-border);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.character_portrait img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-}
-
-.portrait_placeholder {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem;
-  font-size: 0.8rem;
-  color: var(--vp-c-text-2);
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.02),
-    rgba(255, 255, 255, 0.02) 6px,
-    rgba(255, 255, 255, 0.04) 6px,
-    rgba(255, 255, 255, 0.04) 12px
-  );
-}
-
-.character_portrait figcaption {
-  padding: 0.5rem 0.75rem;
-  color: var(--vp-c-text-2);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  text-align: center;
-}
-
-/* Generic section card */
-
-.character_section {
-  background: var(--vp-c-bg-soft);
-  padding: 1.5rem 1.75rem;
-  border: 1px solid var(--vp-c-border);
-}
-
-.character_section + .character_section {
-  margin-top: 1rem;
-}
-
-@media (min-width: 840px) {
-  .character_section + .character_section {
-    margin-top: 0;
-  }
-}
-
-.character_section h2 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--vp-c-text-2);
-  border-bottom: 1px solid var(--vp-c-divider);
-  padding-bottom: 0.35rem;
-  margin-bottom: 0.75rem;
-}
-
-/* Story text */
-
-.character_backstory {
-  line-height: 1.7;
-  max-width: 70ch;
-  white-space: pre-line;
-  margin: 0;
-}
-
-/* Attributes card (sidebar) */
-
-.character_attributes {
-  padding: 0.9rem 1.25rem;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
-  border-radius: 0.9rem;
-  text-align: left;
-}
-
-.character_attributes h2 {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--vp-c-text-3);
-  border-bottom: 1px solid var(--vp-c-divider);
-  padding-bottom: 0.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.character_attributes .hint {
-  margin-top: 0.6rem;
-  font-size: 0.75rem;
-  color: var(--vp-c-text-3);
-}
-
-.attributes_row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.35rem 0;
-  border-bottom: 1px solid var(--vp-c-divider);
-}
-
-.attributes_row:last-child {
-  border-bottom: none;
-}
-
-.attr_name {
-  font-weight: 500;
-  text-align: left;
-}
-
-.attr_value {
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-  min-width: 2.5rem;
-  display: inline-block;
-  position: relative;
-  padding-bottom: 0.1rem;
-  color: var(--vp-c-text-3);
-}
-
-.attr_value::after {
-  content: '';
-  display: inline-block;
-  width: 1.25rem;
-  height: 0.25rem;
-  background: var(--vp-c-divider);
-  border-radius: 2px;
-  margin-left: 0.15rem;
-  position: relative;
-  top: -1px;
-}
-
-.attr_positive {
-  color: var(--vp-c-brand-1);
-}
-
-.attr_positive::after {
-  background: var(--vp-c-brand-1);
-}
-
-.attr_negative {
-  color: var(--vp-c-danger-2);
-}
-
-.attr_negative::after {
-  background: var(--vp-c-danger-2);
-}
-
-.hint {
-  margin-top: 1.25rem;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: var(--vp-c-text-3);
-  text-align: left;
-}
-
-.hint_icon {
-  font-size: 0.9rem;
-  line-height: 1;
-  margin-top: 0.15rem;
-  opacity: 0.85;
-}
-
-/* Skills block – now simply a full-width section */
-
-.character_skills_section {
-  /* inherits card look from .character_section */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.skills_row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 0.35rem 0;
-  border-bottom: 1px solid var(--vp-c-divider);
-  gap: 0.75rem;
-  border-left: 3px solid var(--skill-domain-color, transparent);
-  flex-wrap: wrap;
-  background: rgba(255, 255, 255, 0.02);
-  padding: 0.4rem 0.75rem;
-}
-
-.skills_row:last-child {
-  border-bottom: none;
-}
-
-@media (min-width: 720px) {
-  .skills_row {
-    flex-wrap: nowrap;
-    align-items: baseline;
-  }
-}
-
-.skill_main {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.skill_header {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.skill_name {
-  font-weight: 500;
-}
-
-.skill_level {
-  font-size: 0.85rem;
-  color: var(--vp-c-text-2);
-}
-
-.skill_description {
-  margin: 0;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: var(--vp-c-text-2);
-}
-
-.skill_meta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.skill_badge {
-  font-size: 0.65rem;
-  padding: 0.18rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 215, 0, 0.25);
-  background: rgba(255, 215, 0, 0.04);
-}
-
-.character_empty {
-  padding: 4rem 0;
-  text-align: center;
-  color: var(--vp-c-text-2);
-}
-
-.skills_domain_group {
-  padding-top: 0.75rem;
-}
-
-.skills_domain_group:last-of-type {
-  margin-bottom: 0;
-}
-
-.skills_domain_header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-.skills_domain_label {
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--vp-c-text-1);
-}
-
-@media (min-width: 840px) {
-  .skills_domain_group {
-    position: relative;
-  }
-
-  .skills_domain_header {
-    position: sticky;
-    top: 1.5rem;
-    z-index: 1;
-    background: inherit;
-    padding-block: 0.25rem;
-  }
-}
-
-.character_section,
-.character_portrait,
-.skills_domain_group {
-  border-radius: 1rem;
-}
-
-.character_section,
-.character_portrait {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
-}
-
-.attributes_list,
-.skills_list {
-  padding: 0.25rem 0;
-  margin: 0;
-  list-style: none;
-}
-
-.character_title_row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-@media (max-width: 599px) {
-  .character_title_row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
-  }
-}
-
-.character_sidebar_card {
-  width: 100%;              /* take full available width on mobile */
-  max-width: 100%;          /* no 320px cap on small screens */
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-border);
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
-}
-
-@media (min-width: 840px) {
-  .character_sidebar_card {
-    width: auto;           /* follow grid column */
-    max-width: 320px;      /* optional: keep it neat on large screens */
-    margin: 0 auto;
-  }
-}
-
-/* Portrait inside the card: no own border/shadow */
-.character_sidebar_card .character_portrait {
-  border: none;
-  box-shadow: none;
-  margin: 0;
-  background: var(--vp-c-bg-soft);
-}
-
-.character_sidebar_card .character_portrait figcaption {
-  border-top: 1px solid var(--vp-c-divider);
-}
-
-.character_sidebar_card .character_attributes {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0.75rem 1.25rem 1rem;
-}
-</style>

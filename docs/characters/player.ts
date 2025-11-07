@@ -29,8 +29,27 @@ export interface AttributesRules {
   maxPerAttribute: number
 }
 
+export enum BodyState {
+  HEALTHY = 'healthy',
+  HURT = 'hurt',
+  DEEP_WOUNDS = 'deep_wounds',
+}
+
+export enum MindState {
+  SANE = 'sane',
+  UNSTABLE = 'unstable',
+  INSANE = 'insane',
+}
+
+export interface Status {
+  body: BodyState
+  mind: MindState
+  resonance: number
+}
+
 export interface PlayerCharacter {
   identity: CharacterIdentity
   attributes: Attributes
   skills: CharacterSkill[]
+  status: Status
 }
