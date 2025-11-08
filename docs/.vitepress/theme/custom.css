@@ -91,7 +91,7 @@
   background-image: url('../../assets/eidolon.svg');
 }
 
-.tv-static {
+/* .tv-static {
   background:
     repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 50% 0/2500px 2500px,
     repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 60% 60%/2500px 2500px;
@@ -103,4 +103,9 @@
   100% {
     background-position: 50% 0, 60% 50%
   }
+} */
+
+.tv-static {
+  background-image: url("https://novaziodaonda.wordpress.com/wp-content/uploads/2012/10/fim.gif");
+  background-blend-mode: difference;
 }

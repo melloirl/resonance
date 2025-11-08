@@ -116,7 +116,7 @@ export const characters: PlayerCharacter[] = [
     status: {
       body: BodyState.HEALTHY,
       mind: MindState.SANE,
-      resonance: 0.05,
+      resonance: 0.1,
     },
   },
   {
