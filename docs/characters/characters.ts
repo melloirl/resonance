@@ -48,7 +48,7 @@ export const characters: PlayerCharacter[] = [
     status: {
       body: BodyState.HEALTHY,
       mind: MindState.SANE,
-      resonance: 0.05,
+      resonance: 0.1,
     },
   },
   {
@@ -85,8 +85,8 @@ export const characters: PlayerCharacter[] = [
     ],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.SANE,
-      resonance: 0.05,
+      mind: MindState.UNSTABLE,
+      resonance: 0.15,
     },
   },
   {
@@ -116,18 +116,18 @@ export const characters: PlayerCharacter[] = [
     status: {
       body: BodyState.HEALTHY,
       mind: MindState.SANE,
-      resonance: 0.1,
+      resonance: 0.15,
     },
   },
   {
     identity: {
       fullName: 'Leo Wen (温凉)',
       gender: 'Homem Cis',
-      age: 24,
-      occupation: 'Caixa de Conveniência',
-      appearanceUrl: 'https://i.imgur.com/peVYrKn.jpeg',
+      age: 22,
+      occupation: 'Caixista do Tim Hortons',
+      appearanceUrl: '',
       backstory:
-        'Oliver Boucher Bergman, conhecido como "Velho Canarrí", nasceu e viveu toda a vida em Welderhide.\n\n Descendente de imigrantes europeus que ajudaram a fundar a cidade no século XIX, começou a trabalhar nas minas ainda jovem. Fraco de corpo, mas dono de uma percepção aguçada, ganhou respeito entre os colegas por seu estranho talento em prever acidentes e desastres nas galerias subterrâneas. \n\n Tornou-se uma figura importante no sindicato dos mineradores, lutando por melhores condições e denunciando abusos da Eidolon.\n\n Após o fechamento das minas, foi demitido e perdeu quase tudo, mas junto de alguns amigos abriu um pequeno bar — um refúgio para os velhos mineradores e um lembrete do passado da cidade.\n\n Amargurado e teimoso, Oliver continua investigando a Eidolon por conta própria, guiado mais pela raiva e nostalgia do que pela esperança.',
+        "Leo é o cara quieto que trabalha no turno da noite no Tim Hortons da estação de metrô.\n\nSempre de moletom largo, tênis gastos e cabelo meio bagunçado, ele vive com aquela cara de quem não dorme direito, mas ainda assim trata todo mundo com um cuidado quase automático.\n\n Filho de imigrantes taiwaneses, cresceu ouvindo a avó chamar ele de 'A-Liang' e aprendendo pequenos costumes, como fazer chá pra quem tá mal ou colocar a família sempre em primeiro lugar.\n\nEle largou a faculdade de engenharia pra cuidar dela, mas nunca fala disso com detalhes, só dá um sorriso cansado e diz que 'alguém tinha que fazer'.\n\nNo geral, é prestativo, observador e gentil.",
       personality: 'Prestativa',
       motivation: 'Família',
       fear: 'Morte',
@@ -137,16 +137,16 @@ export const characters: PlayerCharacter[] = [
       },
     },
     attributes: {
-      body: 3,
-      mind: 2,
-      charisma: -1,
-      will: 2,
+      body: 0,
+      mind: 3,
+      charisma: 1,
+      will: 1,
     },
-    skills: [cs(SkillNames.SEXTO, 1, true), cs(SkillNames.CONTATOS, 1, true)],
+    skills: [cs(SkillNames.ELETRONICA, 4, true), cs(SkillNames.COMPUTACAO, 3, true), cs(SkillNames.FURTIVIDADE, 2), cs(SkillNames.LOGICA, 2), cs(SkillNames.EMPATIA, 1)],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.SANE,
-      resonance: 0.05,
+      mind: MindState.UNSTABLE,
+      resonance: 0.15,
     },
   },
   {
@@ -182,8 +182,8 @@ export const characters: PlayerCharacter[] = [
     ],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.SANE,
-      resonance: 0.05,
+      mind: MindState.UNSTABLE,
+      resonance: 0.15,
     },
   },
   {
@@ -192,14 +192,14 @@ export const characters: PlayerCharacter[] = [
       gender: 'Homem Cis',
       age: 26,
       occupation: 'Legista',
-      appearanceUrl: '',
+      appearanceUrl: 'https://i.imgur.com/yoaVWbD.png',
       backstory:
         'Silas nasceu em uma família tranquila e pacata, na cidade de Toronto, no Canadá. Ao lado dos pais e da irmã mais velha, cresceu em um ambiente harmonioso, sem precisar lidar com grandes conflitos até os oito anos de idade, quando sua irmã mais velha desapareceu repentinamente em um dia comum. Alicia, então uma estudante do ensino médio, simplesmente não voltou para casa. O desaparecimento abalou profundamente a família, que passou meses se movimentando incansavelmente em busca de respostas, sem jamais desistir de encontrá-la.\n\n Aos 14 anos, Silas começou a ter “vislumbres” da irmã desaparecida. Ele afirmava vê-la e conversar com ela, como se ainda estivesse por perto, observando-o à distância. Foi então que percebeu que, talvez, Alicia realmente não estivesse mais neste mundo  e que, por mais que quisesse, nada poderia fazer por ela naquele momento.\n\n A partir daí, sua mente passou a pregá-lo peças com frequência. Silas começou a se comunicar não apenas com a irmã supostamente falecida, mas também com outras pessoas que ninguém mais conseguia ver. Aquilo despertava nele tanto medo quanto curiosidade. Os pais, desesperados, buscaram toda a ajuda possível e, na tentativa de recomeçar, decidiram se mudar para Ontário, acreditando que uma nova vida e novas memórias poderiam amenizar o trauma da perda e o sofrimento do filho. Mas, apesar dos esforços, as visões nunca cessaram.\n\n Com o passar dos anos, Silas aprendeu a lidar com a própria mente e a conviver com as vozes e presenças que o acompanhavam. Acostumou-se a nunca mais estar realmente sozinho. E foi assim que decidiu dedicar sua vida ao que mais entendia: cuidar daqueles que já partiram.',
       personality: 'Sereno',
       motivation: 'Propósito',
       fear: 'Perda',
       imageOffset: {
-        x: 0,
+        x: 50,
         y: 0,
       },
     },
@@ -212,8 +212,8 @@ export const characters: PlayerCharacter[] = [
     skills: [cs(SkillNames.MEDICINA, 3, true), cs(SkillNames.SEXTO, 3, true), cs(SkillNames.INVESTIGACAO, 2), cs(SkillNames.DESTREZA, 2), cs(SkillNames.PERSUASAO, 1), cs(SkillNames.REFLEXOS, 1)],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.SANE,
-      resonance: 0.1,
+      mind: MindState.UNSTABLE,
+      resonance: 0.15,
     },
   },
 ]
