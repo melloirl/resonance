@@ -155,7 +155,7 @@ export const characters: PlayerCharacter[] = [
       gender: 'Mulher Cis',
       age: 26,
       occupation: 'Enfermeira',
-      appearanceUrl: 'https://i.imgur.com/WL5KJFf.jpeg',
+      appearanceUrl: 'https://i.imgur.com/UmtKcaV.png',
       backstory: 'Ela é uma garotinha muito divertida.',
       personality: 'Perfeccionista',
       motivation: 'Felicidade',
