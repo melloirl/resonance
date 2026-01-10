@@ -142,7 +142,7 @@ const mindStatusClass = computed(() => {
               <img :src="character.identity.appearanceUrl" :style="{
                 'object-position': `${character.identity.imageOffset.x}% ${character.identity.imageOffset.y}%`
               }" :alt="character.identity.fullName" class="block w-full h-auto aspect-[3/4] object-cover" />
-              <div class="mt-3 flex absolute bottom-0 bg-[color:var(--vp-c-bg-soft)] w-full gap-2 text-left px-4 py-2 items-center justify-between">
+              <div class="mt-3 flex absolute bottom-0 bg-[color:var(--vp-c-bg-soft)] w-full gap-2 text-left px-4 py-2 items-center justify-between z-10 opacity-80">
                 <div class="flex items-center justify-between gap-2">
                   <span class="text-[0.72rem] font-bold uppercase tracking-[0.09em] text-[color:var(--vp-c-text-1)]">
                     FÍSICO

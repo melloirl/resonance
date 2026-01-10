@@ -17,7 +17,7 @@ export const characters: PlayerCharacter[] = [
       gender: 'Mulher Cis',
       age: 31,
       occupation: 'Roteirista',
-      appearanceUrl: 'https://i.imgur.com/oBkm3Fk.jpeg',
+      appearanceUrl: 'https://i.imgur.com/ejmVIyh.png',
       backstory:
         'Tallulah nasceu em Natchez, Mississippi, em uma família indígena Choctaw, cercada por afeto e histórias que moldaram sua imaginação.\n\n A caminho de visitá-la na faculdade, no seu aniversário de 19 anos, seus pais morreram em um acidente de carro, deixando para ela apenas memórias e a responsabilidade de seguir em frente.\n\n Anos depois, ela se mudou para a Califórnia e encontrou trabalho como roteirista na American Broadcasting Company, tentando se ancorar no trabalho enquanto lidava com o luto.\n\n Lá, se apaixonou por Evelyn, um amor secreto que precisou ser escondido do mundo — até que Evelyn desapareceu durante uma viagem de trabalho há quatro anos, deixando um vazio que Tallulah tentou preencher com longas jornadas de escrita e recaídas na bebida.\n\n Em junho de 1999, um e-mail inesperado de Evelyn, pedindo que ela fosse ao Canadá, reacendeu todas as dores e esperanças, levando Tallulah a cruzar estradas e cidades desconhecidas em busca de respostas e da mulher que ainda ama.',
       personality: 'Resiliente',
@@ -43,12 +43,13 @@ export const characters: PlayerCharacter[] = [
       cs(SkillNames.TIRO, 2),
       cs(SkillNames.MARCIAIS, 1),
       cs(SkillNames.MECANICA, 1),
-      cs(SkillNames.VONTADE, 1),
+      cs(SkillNames.VONTADE, 2),
+      cs(SkillNames.INTIMIDACAO, 1),
     ],
     status: {
       body: BodyState.HEALTHY,
       mind: MindState.SANE,
-      resonance: 0.1,
+      resonance: 0.5,
     },
   },
   {
@@ -81,12 +82,13 @@ export const characters: PlayerCharacter[] = [
       cs(SkillNames.SEXTO, 2),
       cs(SkillNames.VONTADE, 1),
       cs(SkillNames.PERSUASAO, 2),
-      cs(SkillNames.CONHECIMENTO, 2),
+      cs(SkillNames.CONHECIMENTO, 3),
+      cs(SkillNames.INVESTIGACAO, 1),
     ],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.UNSTABLE,
-      resonance: 0.15,
+      mind: MindState.SANE,
+      resonance: 0.5,
     },
   },
   {
@@ -112,11 +114,11 @@ export const characters: PlayerCharacter[] = [
       charisma: -1,
       will: 2,
     },
-    skills: [cs(SkillNames.SEXTO, 4, true), cs(SkillNames.CONTATOS, 3, true), cs(SkillNames.ATLETISMO, 2), cs(SkillNames.INVESTIGACAO, 2), cs(SkillNames.MECANICA, 1)],
+    skills: [cs(SkillNames.SEXTO, 4, true), cs(SkillNames.CONTATOS, 3, true), cs(SkillNames.ATLETISMO, 2), cs(SkillNames.INVESTIGACAO, 2), cs(SkillNames.MECANICA, 1), cs(SkillNames.VONTADE, 2)],
     status: {
       body: BodyState.HEALTHY,
       mind: MindState.SANE,
-      resonance: 0.15,
+      resonance: 0.5,
     },
   },
   {
@@ -145,8 +147,8 @@ export const characters: PlayerCharacter[] = [
     skills: [cs(SkillNames.ELETRONICA, 4, true), cs(SkillNames.COMPUTACAO, 3, true), cs(SkillNames.FURTIVIDADE, 2), cs(SkillNames.LOGICA, 2), cs(SkillNames.EMPATIA, 1)],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.UNSTABLE,
-      resonance: 0.15,
+      mind: MindState.SANE,
+      resonance: 0.5,
     },
   },
   {
@@ -179,11 +181,13 @@ export const characters: PlayerCharacter[] = [
       cs(SkillNames.REFLEXOS, 1),
       cs(SkillNames.PSICOLOGIA, 2),
       cs(SkillNames.SEXTO, 2),
+      cs(SkillNames.INVESTIGACAO, 1),
+      cs(SkillNames.VONTADE, 1),
     ],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.UNSTABLE,
-      resonance: 0.15,
+      mind: MindState.SANE,
+      resonance: 0.5,
     },
   },
   {
@@ -209,11 +213,19 @@ export const characters: PlayerCharacter[] = [
       charisma: 2,
       will: 1,
     },
-    skills: [cs(SkillNames.MEDICINA, 3, true), cs(SkillNames.SEXTO, 3, true), cs(SkillNames.INVESTIGACAO, 2), cs(SkillNames.DESTREZA, 2), cs(SkillNames.PERSUASAO, 1), cs(SkillNames.REFLEXOS, 1)],
+    skills: [
+      cs(SkillNames.MEDICINA, 3, true),
+      cs(SkillNames.SEXTO, 4, true),
+      cs(SkillNames.INVESTIGACAO, 2),
+      cs(SkillNames.DESTREZA, 2),
+      cs(SkillNames.PERSUASAO, 1),
+      cs(SkillNames.REFLEXOS, 1),
+      cs(SkillNames.TIRO, 1),
+    ],
     status: {
       body: BodyState.HEALTHY,
-      mind: MindState.UNSTABLE,
-      resonance: 0.15,
+      mind: MindState.SANE,
+      resonance: 0.5,
     },
   },
 ]
